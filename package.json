@@ -1,8 +1,8 @@
 {
-  "name": "template",
+  "name": "snake-v2",
   "author": "xre15x",
   "version": "1.0.0",
-  "description": "A webpack template",
+  "description": "A more serious version of my previous snake game attempt.",
   "main": "index.js",
   "license": "ISC",
   "type": "module",

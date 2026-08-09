@@ -1,13 +1,12 @@
-// MAKE SURE TO SEPARATE GAME LOGIC FROM UI, AND USE LERP TO MOVE SNAKE
+function createPlayer() {};
 
-function game() {
-    function frame() {
-        requestAnimationFrame(frame); // Recursive call to repeat frames
-    };
+function createGame() {
+    // Private functions
 
-    return {};
+    // Public functions
+    function update() {};
+
+    return {update};
 };
 
-function gameUI() {};
-
-export default game;
+export default createGame;

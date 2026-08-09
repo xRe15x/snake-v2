@@ -1,0 +1,27 @@
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    background-color: lightgrey;
+    text-align: center;
+}
+
+h1 {
+    padding: 0;
+    margin: 0.5rem;
+}
+
+main {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#game {
+    background-color: lightgrey;
+}

@@ -1,5 +1,5 @@
 import "./style.css";
-import createGame from "./game";
+import createGame from "./game.js";
 import createUI from "./ui.js"
 
 const game = createGame();

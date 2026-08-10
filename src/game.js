@@ -1,5 +1,5 @@
 function createPlayer() {
-    const segments = [{x: 0, y: 0}]; // Array of objects with x and y of the segments position, index 0 will always be the head
+    const segments = [{x: 0, y: 0}, {x: 0, y: 1}, {x: 0, y: 2}]; // Array of objects with x and y of the segments position, index 0 will always be the head
     let direction = "right"; // left, right, up, down
 
     // Private functions
@@ -20,21 +20,21 @@ function createPlayer() {
     function move() {
         const oldSegmentPositions = []; // Old position of segments before the shift in direction
         segments.forEach((pos, index) => {
-            oldSegmentPositions[index] = pos; // Store old position to access later otherwise a chain reaction will occur when shifting the positions of all elements
+            oldSegmentPositions[index] = {...pos}; // Store old position to access later otherwise a chain reaction will occur when shifting the positions of all elements
             if (index === 0) { // Head
                 // Update heads position
                 switch (direction) {
                     case "left":
-                        segments[index].x = segments[index].x - 1;
+                        segments[index].x -= 1;
                         break;
                     case "right":
-                        segments[index].x = segments[index].x + 1;
+                        segments[index].x += 1;
                         break;
                     case "up":
-                        segments[index].y = segments[index].y - 1;
+                        segments[index].y -= 1;
                         break;
                     case "down":
-                        segments[index].y = segments[index].y + 1;
+                        segments[index].y += 1;
                         break;
                 }
             } else {
@@ -67,12 +67,25 @@ function createGame() {
         if (timeStamp - previousTimeStamp > 1000) {
             previousTimeStamp = timeStamp;
             player.move();
+
+            console.log("----------------")
             console.log(player.segments[0])
+            console.log(player.segments[1])
+            console.log(player.segments[2])
         }
         //console.log(player.getDirection())
     };
 
-    return {update};
+    function getUIData() { // Data to be sent to the UI
+        return {
+            playerSegments: player.segments
+        };
+    }
+
+    return {
+        update,
+        getUIData
+    };
 };
 
 export default createGame;

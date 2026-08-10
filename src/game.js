@@ -1,5 +1,5 @@
 function createPlayer() {
-    const segments = [{x: 0, y: 0}, {x: 0, y: 1}, {x: 0, y: 2}]; // Array of objects with x and y of the segments position, index 0 will always be the head
+    const segments = [{x: 0, y: 0}]; // Array of objects with x and y of the segments position, index 0 will always be the head
     let direction = "right"; // left, right, up, down
 
     // Private functions
@@ -106,6 +106,8 @@ function createGame(gridSize) {
     const apple = createApple(gridSize);
 
     let lastAppleTimeStamp = 0;
+
+    let score = 0;
     // Private functions
 
     // Public functions
@@ -123,6 +125,7 @@ function createGame(gridSize) {
             apple.remove();
             player.increaseLength();
             lastAppleTimeStamp = timeStamp; // Reset apple spawn timer only after its been eaten
+            score++;
         }
 
         player.segments.forEach(pos => { // Player segments
@@ -141,6 +144,7 @@ function createGame(gridSize) {
         return {
             playerSegments: player.segments,
             applePosition: apple.getPosition,
+            score
         };
     }
 

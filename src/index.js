@@ -5,10 +5,10 @@ import createUI from "./ui.js"
 const game = createGame();
 const ui = createUI();
 
-function gameLoop() {
+function gameLoop(timeStamp) {
     requestAnimationFrame(gameLoop);
 
-    game.update();
+    game.update(timeStamp);
     ui.update();
 };
 

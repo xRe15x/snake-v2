@@ -90,8 +90,8 @@ function createGame(gridSize) {
     function update(timeStamp) {
         player.move();
 
+        // If its been longer than 1000ms and an apple has not spawned yet
         if (timeStamp - lastAppleTimeStamp >= 1000 && apple.getPosition() === undefined) {
-            console.log(1)
             apple.spawn();
         }
     };

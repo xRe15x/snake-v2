@@ -2,6 +2,8 @@ function createUI(gridSize) {
     const canvas = document.getElementById("game");
     const ctx = canvas.getContext("2d");
 
+    const styles = getColours();
+
     // Get X and Y size of a cell
     const cellX = canvas.width / gridSize.x;
     const cellY = canvas.height / gridSize.y;
@@ -10,17 +12,28 @@ function createUI(gridSize) {
     //const bestScoreText = document.getElementById("best-score");
 
     // Private functions
+    function getColours() {
+        const styles = getComputedStyle(document.documentElement); // Root element
+        const colours = {};
 
-    // Make a function to get the css colours ////////////////////////////////////
+        for (const name of Object.values(styles)) {
+            if (name.startsWith("--")) {
+                const value = styles.getPropertyValue(name).trim(); // Apparently you need to trim, personally I haven't had any issues but I might as well
+                colours[name] = value;
+            }
+        }
+
+        return colours;
+    }
 
     function drawMap() { // Draw the checkered background
         const shrink = 4; // Amount to shrink each cell so the background colour slightly reveals
         for (let x = 0; x < gridSize.x; x++) {
             for (let y = 0; y < gridSize.y; y++) {
                 if ((x + y) % 2 === 0) {
-                    ctx.fillStyle = "rgb(51, 51, 51)"
+                    ctx.fillStyle = styles["--grid-colour1"];
                 } else {
-                    ctx.fillStyle = "rgb(36, 36, 36)";
+                    ctx.fillStyle = styles["--grid-colour2"];
                 }
                 ctx.fillRect(cellX * x + shrink / 2, cellY * y + shrink / 2, cellX - shrink, cellY - shrink); // Fill cells and apply shrink
             }
@@ -30,7 +43,7 @@ function createUI(gridSize) {
     function drawSnake(segments) {
         const shrink = 2;
         segments.forEach(pos => {
-            ctx.fillStyle = "rgb(252, 252, 252)";
+            ctx.fillStyle = styles["--snake-colour"];
             ctx.fillRect(cellX * pos.x + shrink / 2, cellY * pos.y + shrink / 2, cellX - shrink, cellY - shrink);
         });
     };
@@ -39,7 +52,7 @@ function createUI(gridSize) {
         if (position === undefined) return; // Apple has not spawned yet
 
         const shrink = 10;
-        ctx.fillStyle = "rgb(255,0,0)";
+        ctx.fillStyle = styles["--apple-colour"];
         ctx.fillRect(cellX * position.x + shrink / 2, cellY * position.y + shrink / 2, cellX - shrink, cellY - shrink)
     }
 

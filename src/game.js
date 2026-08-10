@@ -116,13 +116,13 @@ function createGame(gridSize) {
         const applePos = apple.getPosition();
         if (timeStamp - lastAppleTimeStamp >= 2000 && applePos === undefined) {
             apple.spawn(player.segments);
-            lastAppleTimeStamp = timeStamp;
         }
 
         // Check collisions
         if (applePos && player.checkCollided(applePos)) { // Apple
             apple.remove();
             player.increaseLength();
+            lastAppleTimeStamp = timeStamp; // Reset apple spawn timer only after its been eaten
         }
 
         player.segments.forEach(pos => { // Player segments

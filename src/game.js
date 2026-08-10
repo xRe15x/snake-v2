@@ -57,8 +57,8 @@ function createPlayer() {
     };
 };
 
-function createApple() { // With how this is made, the game can only have 1 apple at a time
-    let position = undefined // object of the apples x and y position
+function createApple(gridSize) { // With how this is made, the game can only have 1 apple at a time
+    let position = undefined // object of the apples x and y position, undefined means one hasnt spawned yet
 
     // Private functions
     function getRandomPosition(min, max) {
@@ -68,8 +68,8 @@ function createApple() { // With how this is made, the game can only have 1 appl
     // Public functions
     function spawn() {
         position = {
-            x: getRandomPosition(),
-            y: getRandomPosition()
+            x: getRandomPosition(0, gridSize.x),
+            y: getRandomPosition(0, gridSize.y)
         }
     }
 
@@ -81,15 +81,18 @@ function createApple() { // With how this is made, the game can only have 1 appl
 
 function createGame(gridSize) {
     const player = createPlayer();
-    const apple = createApple();
+    const apple = createApple(gridSize);
+
+    let lastAppleTimeStamp = 0;
     // Private functions
 
     // Public functions
-    function update() {
+    function update(timeStamp) {
         player.move();
 
-        if (apple.getPosition() !== undefined) {
-
+        if (timeStamp - lastAppleTimeStamp >= 1000 && apple.getPosition() === undefined) {
+            console.log(1)
+            apple.spawn();
         }
     };
 

@@ -78,7 +78,7 @@ function createApple(gridSize) { // With how this is made, the game can only hav
         do { // Repeat getting a random position until it doesnt overlap with the player segments
             randomPos = {
                 x: Math.floor(Math.random() * gridSize.x),
-                y: Math.floor(Math.random() * gridSize.x)
+                y: Math.floor(Math.random() * gridSize.y)
             }
         } while (segments.some(pos => pos.x === randomPos.x && pos.y === randomPos.y));
 
@@ -102,13 +102,13 @@ function createApple(gridSize) { // With how this is made, the game can only hav
 }
 
 function createGame(gridSize) {
+    // Init other functions
     const player = createPlayer();
     const apple = createApple(gridSize);
 
-    let lastAppleTimeStamp = 0;
+    let lastAppleTimeStamp = 0; // Keep track of when the last apple spawned
 
-    let score = 0;
-    // Private functions
+    let score = 0; // Score for the current game
 
     // Public functions
     function update(timeStamp) {
@@ -118,6 +118,7 @@ function createGame(gridSize) {
         const applePos = apple.getPosition();
         if (timeStamp - lastAppleTimeStamp >= 2000 && applePos === undefined) {
             apple.spawn(player.segments);
+            console.log("APPLE SPAWNED");
         }
 
         // Check collisions

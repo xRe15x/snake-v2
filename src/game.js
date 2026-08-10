@@ -121,6 +121,13 @@ function createGame(gridSize) {
         }
 
         // Check collisions
+        for (const segmentPos of player.segments) { // Player segments
+            if (player.checkCollided(segmentPos)) {
+                console.log("a");
+                return true;
+            }
+        }
+
         if (applePos && player.checkCollided(applePos)) { // Apple
             apple.remove();
             player.increaseLength();
@@ -128,15 +135,9 @@ function createGame(gridSize) {
             score++;
         }
 
-        player.segments.forEach(pos => { // Player segments
-            if (player.checkCollided(pos)) {
-                console.log("COLLIDED WITH SELF")
-            }
-        })
-
         const headPos = player.segments[0]
         if (headPos.x < 0 || headPos.x >= gridSize.x || headPos.y < 0 || headPos.y >= gridSize.y) { // Check if player is outside map boundaries
-            console.log("OUT OF BOUNDS");
+            return true;
         }
     };
 

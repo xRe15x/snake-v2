@@ -1,9 +1,4 @@
-:root {
-    --very-light-green: rgb(123, 194, 123);
-    --light-green: rgb(123, 211, 123);
-    --darker-green: rgb(102, 197, 102);
-    --game-bg: rgb(104, 168, 115);
-}
+:root {}
 
 body {
     margin: 0;
@@ -11,12 +6,12 @@ body {
     display: flex;
     flex-direction: column;
     color: white;
-    background-color: var(--very-light-green);
+    background-color: grey;
 }
 
 header {
-    background-color: var(--light-green);
-    border-bottom: 4px solid var(--darker-green);
+    background-color: darkgrey;
+    border-bottom: 4px solid lightgrey;
     text-align: center;
 }
 
@@ -30,9 +25,22 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
 #game {
-    background-color: var(--game-bg);
-    border: 2px solid var(--darker-green)
+    background-color:darkgrey;
+    border: 2px solid lightgrey;
+}
+
+.bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#score, #best-score {
+    font-size: 2rem;
+    display: inline;
 }

@@ -9,7 +9,7 @@ function gameLoop(timeStamp) {
     requestAnimationFrame(gameLoop);
 
     game.update(timeStamp);
-    ui.update();
+    ui.update(game.getUIData());
 };
 
 requestAnimationFrame(gameLoop);

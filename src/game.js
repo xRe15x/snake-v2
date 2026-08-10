@@ -43,6 +43,15 @@ function createPlayer() {
         });
     };
 
+    function checkCollided(pos) { // Check if segment head has collided with anything other than itself
+        return (segments[0].x === pos.x && segments[0].y === pos.y) && pos !== segments[0];
+    }
+
+    function increaseLength() { // Increase length by 1
+        const lastSegment = segments[segments.length - 1];
+        segments.push({x: lastSegment.x, y: lastSegment.y});
+    }
+
     document.addEventListener("keydown", event => {
         const validDirections = {w: "up", a: "left", s: "down", d: "right"};
         if (validDirections[event.key]) {
@@ -54,6 +63,8 @@ function createPlayer() {
         move,
         segments,
         getDirection: () => direction,
+        checkCollided,
+        increaseLength
     };
 };
 
@@ -61,20 +72,31 @@ function createApple(gridSize) { // With how this is made, the game can only hav
     let position = undefined // object of the apples x and y position, undefined means one hasnt spawned yet
 
     // Private functions
-    function getRandomPosition(min, max) {
-        return Math.floor(Math.random() * (max - min) + min);
+    function getRandomPosition(segments) {
+        let randomPos;
+
+        do { // Repeat getting a random position until it doesnt overlap with the player segments
+            randomPos = {
+                x: Math.floor(Math.random() * gridSize.x),
+                y: Math.floor(Math.random() * gridSize.x)
+            }
+        } while (segments.some(pos => pos.x === randomPos.x && pos.y === randomPos.y));
+
+        return randomPos;
     }
 
     // Public functions
-    function spawn() {
-        position = {
-            x: getRandomPosition(0, gridSize.x),
-            y: getRandomPosition(0, gridSize.y)
-        }
+    function spawn(segments) {
+        position = getRandomPosition(segments)
+    }
+
+    function remove() {
+        position = undefined;
     }
 
     return {
         spawn,
+        remove,
         getPosition: () => position
     };
 }
@@ -91,8 +113,26 @@ function createGame(gridSize) {
         player.move();
 
         // If its been longer than 1000ms and an apple has not spawned yet
-        if (timeStamp - lastAppleTimeStamp >= 1000 && apple.getPosition() === undefined) {
-            apple.spawn();
+        const applePos = apple.getPosition();
+        if (timeStamp - lastAppleTimeStamp >= 1000 && applePos === undefined) {
+            apple.spawn(player.segments);
+        }
+
+        // Check collisions
+        if (applePos && player.checkCollided(applePos)) { // Apple
+            apple.remove();
+            player.increaseLength();
+        }
+
+        player.segments.forEach(pos => { // Player segments
+            if (player.checkCollided(pos)) {
+                console.log("COLLIDED WITH SELF")
+            }
+        })
+
+        const headPos = player.segments[0]
+        if (headPos.x < 0 || headPos.x >= gridSize.x || headPos.y < 0 || headPos.y >= gridSize.y) { // Check if player is outside map boundaries
+            console.log("OUT OF BOUNDS");
         }
     };
 

@@ -2,7 +2,7 @@ import "./style.css";
 import createGame from "./game.js";
 import createUI from "./ui.js"
 
-const gridSize = {x: 12, y: 12}
+const gridSize = {x: 10, y: 10}
 
 const game = createGame(gridSize);
 const ui = createUI(gridSize);

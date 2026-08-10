@@ -1,12 +1,22 @@
+:root {
+    --very-light-green: rgb(123, 194, 123);
+    --light-green: rgb(123, 211, 123);
+    --darker-green: rgb(102, 197, 102);
+    --game-bg: rgb(104, 168, 115);
+}
+
 body {
     margin: 0;
     height: 100vh;
     display: flex;
     flex-direction: column;
+    color: white;
+    background-color: var(--very-light-green);
 }
 
 header {
-    background-color: lightgrey;
+    background-color: var(--light-green);
+    border-bottom: 4px solid var(--darker-green);
     text-align: center;
 }
 
@@ -23,5 +33,6 @@ main {
 }
 
 #game {
-    background-color: lightgrey;
+    background-color: var(--game-bg);
+    border: 2px solid var(--darker-green)
 }

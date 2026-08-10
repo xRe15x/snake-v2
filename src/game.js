@@ -114,8 +114,9 @@ function createGame(gridSize) {
 
         // If its been longer than 1000ms and an apple has not spawned yet
         const applePos = apple.getPosition();
-        if (timeStamp - lastAppleTimeStamp >= 1000 && applePos === undefined) {
+        if (timeStamp - lastAppleTimeStamp >= 2000 && applePos === undefined) {
             apple.spawn(player.segments);
+            lastAppleTimeStamp = timeStamp;
         }
 
         // Check collisions

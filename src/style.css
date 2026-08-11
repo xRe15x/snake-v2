@@ -87,9 +87,15 @@ main {
 }
 
 .canvas-container {
-    height: 400px;
+    height: clamp(220px, 42vh, 450px);
     width: 100%;
     position: relative;
+}
+
+@media (max-width: 500px) {
+    .canvas-container {
+        height: clamp(340px, 30vh, 500px);
+    }
 }
 
 #game {
@@ -100,11 +106,7 @@ main {
     width: 100%;
 }
 
-@media (max-width: 500px) {
-    #game {
-        height: 250px;
-    }
-}
+
 
 #game-info {
     background-color: var(--header-colour);
@@ -138,11 +140,13 @@ main {
 
 #death-screen > h2 {
     margin: 0;
-    font-size: 3rem;
+    font-size: clamp(30px, 3rem, 10vw);
 }
 
 #death-screen-score {
-    font-size: 1.2rem;
+    font-size: clamp(12px, 1.2rem, 6vw);
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
 }
 
 #restart {

@@ -6,8 +6,8 @@
     --border-colour: rgb(211, 211, 211);
     --button-colour: rgb(223, 223, 223);
     --text-colour: rgb(24, 24, 24);
-    --snake-colour: rgb(255, 255, 255);
-    --apple-colour: rgb(255, 255, 0);
+    --snake-colour: rgb(180, 0, 0);
+    --apple-colour: rgb(0, 180, 0);
     --grid-colour1: rgb(214, 214, 214);
     --grid-colour2: rgb(202, 202, 202);
 }
@@ -92,6 +92,12 @@ main {
     border-radius: 5px;
     height: 400px;
     width: 100%;
+}
+
+@media (max-width: 500px) {
+    #game {
+        height: 250px;
+    }
 }
 
 #game-info {

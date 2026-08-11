@@ -83,14 +83,20 @@ main {
     justify-content: center;
     align-items: center;
     width: min(85vw, 600px);
-    gap: 0.3rem;
+    gap: 0.8rem;
+}
+
+.canvas-container {
+    height: 400px;
+    width: 100%;
+    position: relative;
 }
 
 #game {
     background-color: var(--header-colour);
     border: 3px solid var(--border-colour);
     border-radius: 5px;
-    height: 400px;
+    height: 100%;
     width: 100%;
 }
 
@@ -115,4 +121,30 @@ main {
 
 #game-info > li {
     font-size: 1.2rem;
+}
+
+#death-screen {
+    position: absolute;
+    left: 2px;
+    top: 3px;
+    height: 100%;
+    width: 100%;
+    background-color: rgb(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#death-screen > h2 {
+    margin: 0;
+    font-size: 3rem;
+}
+
+#death-screen-score {
+    font-size: 1.2rem;
+}
+
+#restart {
+    font-size: 1.5rem;
 }

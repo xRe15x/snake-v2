@@ -106,8 +106,6 @@ main {
     width: 100%;
 }
 
-
-
 #game-info {
     background-color: var(--header-colour);
     border: 2px solid var(--border-colour);
@@ -136,6 +134,8 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    display: none; /* To hide death screen until needed */
 }
 
 #death-screen > h2 {

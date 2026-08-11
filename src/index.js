@@ -2,9 +2,9 @@ import "./style.css";
 import createGame from "./game.js";
 import createUI from "./ui.js"
 
-const gridSize = {x: 10, y: 10}
+const gridSize = {x: 15, y: 10}
 
-const game = createGame(gridSize);
+let game = createGame(gridSize);
 const ui = createUI(gridSize);
 
 let previousTimeStamp = 0;
@@ -18,8 +18,13 @@ function gameLoop(timeStamp) {
     previousTimeStamp = timeStamp;
 
     // Update game and UI
-    game.update(timeStamp);
+    let gameEnded = game.update(timeStamp);
+
     ui.update(game.getUIData());
+
+    if (gameEnded === true) {
+        game = createGame(gridSize);
+    }
 };
 
 requestAnimationFrame(gameLoop); // Start loop

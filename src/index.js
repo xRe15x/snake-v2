@@ -7,8 +7,10 @@ const gridSize = {x: 15, y: 10}
 let game = createGame(gridSize);
 const ui = createUI(gridSize);
 
+const dsRestart = document.getElementById("restart"); // Restart button
+
 let previousTimeStamp = 0;
-let isPlaying = false;
+let isPlaying = true;
 
 function gameLoop(timeStamp) {
     requestAnimationFrame(gameLoop); // Recursive call to loop
@@ -18,17 +20,23 @@ function gameLoop(timeStamp) {
     }
     previousTimeStamp = timeStamp;
 
-    // Update game and UI
+    // Only update game logic if currently playing
     if (isPlaying === true) {
         let gameEnded = game.update(timeStamp);
-        if (gameEnded === true) {
+        if (gameEnded === true) { // Show death screen stuff is lost
             isPlaying = false;
-            //game = createGame(gridSize);
+            ui.showDeathScreen(game.getScore());
         }
     }
 
     ui.update(game.getUIData(), isPlaying);
 };
+
+dsRestart.addEventListener("click", () => {
+    isPlaying = true;
+    ui.hideDeathScreen();
+    game = createGame(gridSize);
+})
 
 requestAnimationFrame(gameLoop); // Start loop
 

@@ -8,22 +8,15 @@ function createUI(gridSize) {
     const cellX = canvas.width / gridSize.x;
     const cellY = canvas.height / gridSize.y;
 
+    // Game info elements
     const scoreText = document.getElementById("score");
     const bestScoreText = document.getElementById("best-score");
 
+    // Death screen elements
     const deathScreen = document.getElementById("death-screen");
     const dsScore = document.getElementById("death-screen-score");
-    const dsRestart = document.getElementById("restart"); // Restart button
 
     // Private functions
-    function showDeathScreen() {
-        deathScreen.style.display = "flex";
-    };
-
-    function hideDeathScreen() {
-        deathScreen.style.display = "none";
-    }
-
     function getColours() {
         const styles = getComputedStyle(document.documentElement); // Root element
         const colours = {};
@@ -69,16 +62,7 @@ function createUI(gridSize) {
     }
 
     // Public functions
-    function update(gameData, isPlaying) {
-        if (isPlaying === false) {
-            console.log("GAME OVER");
-            showDeathScreen();
-            //return;
-        } else {
-            console.log("PLAYING");
-            hideDeathScreen();
-        }
-
+    function update(gameData) {
         const {playerSegments, applePosition, score} = gameData;
 
         // Clear last frame
@@ -93,7 +77,20 @@ function createUI(gridSize) {
         scoreText.textContent = "Score: " + score;
     };
 
-    return {update};
+    function showDeathScreen(score) {
+        deathScreen.style.display = "flex";
+        dsScore.textContent = "You got a score of " + score;
+    };
+
+    function hideDeathScreen() {
+        deathScreen.style.display = "none";
+    }
+
+    return {
+        update,
+        showDeathScreen,
+        hideDeathScreen
+    };
 };
 
 export default createUI;

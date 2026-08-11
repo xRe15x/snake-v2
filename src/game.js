@@ -155,6 +155,7 @@ function createGame(gridSize) {
 
     return {
         update,
+        getScore: () => score,
         getUIData
     };
 };

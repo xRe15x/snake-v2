@@ -2,7 +2,7 @@ function createUI(gridSize) {
     const canvas = document.getElementById("game");
     const ctx = canvas.getContext("2d");
 
-    const styles = getColours();
+    let styles = getColours();
 
     // Get X and Y size of a cell
     const cellX = canvas.width / gridSize.x;
@@ -15,6 +15,14 @@ function createUI(gridSize) {
     // Death screen elements
     const deathScreen = document.getElementById("death-screen");
     const dsScore = document.getElementById("death-screen-score");
+
+    // Theme elements
+    const themeDropdown = document.getElementById("theme-dropdown");
+    const themeBtn = document.getElementById("change-theme");
+    const themes = {
+        light: true,
+        dark: true
+    }
 
     // Private functions
     function getColours() {
@@ -85,6 +93,20 @@ function createUI(gridSize) {
     function hideDeathScreen() {
         deathScreen.style.display = "none";
     }
+
+    themeBtn.addEventListener("click", () => {
+        // Show/Close dropdown
+    })
+
+    themeDropdown.addEventListener("click", event => {
+        if (themes[event.target.textContent]) { // If valid theme
+            [...document.documentElement.classList].forEach(v => document.documentElement.classList.remove(v)); // Remove all other themes
+            document.documentElement.classList.add(event.target.textContent); // Add new theme
+            styles = getColours(); // Register new colours for canvas
+        }
+    })
+
+    // Use event delegation on the dropdown div to change theme by changing the class of the root and using getColours();
 
     return {
         update,

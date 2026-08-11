@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap');
 
-:root { /* Default light theme */
+:root.light {
     --bg-colour: rgb(221, 221, 221);
     --header-colour: rgb(235, 235, 235);
     --border-colour: rgb(211, 211, 211);
@@ -34,6 +34,7 @@ button {
     border-radius: 8px;
     background-color: var(--button-colour);
     font-size: 1.1rem;
+    cursor: pointer;
 }
 
 h1 {
@@ -63,9 +64,38 @@ header {
     border-bottom: 3px solid var(--border-colour);
 }
 
-ul li > button {
+.change-theme-container {
     height: 3.5vh;
     width: 80px;
+}
+
+#change-theme {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+#theme-dropdown {
+    position: relative;
+    top: 2px;
+    width: 100%;
+    height: 0;
+    transition: height 0.25s;
+    overflow: hidden;
+    cursor: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+
+    height: 100px;
+}
+
+#theme-dropdown > li > button {
+    width: 100%;
+}
+
+#change-theme:hover + #theme-dropdown {
+    height: 100px;
 }
 
 main {

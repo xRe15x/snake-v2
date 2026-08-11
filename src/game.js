@@ -1,7 +1,7 @@
 function createPlayer() {
     const segments = [{x: 0, y: 0}]; // Array of objects with x and y of the segments position, index 0 will always be the head
     let direction = "right"; // left, right, up, down
-    let oldDirection = direction; // Direction in the current frame, prevents moving in the opposite direction by pressing something like "A" and "S" really fast
+    let oldDirection = direction; // Direction in the previous frame, prevents moving in the opposite direction by pressing different keys really fast between frames
 
     // Private functions
     function changeDirection(newDirection) {

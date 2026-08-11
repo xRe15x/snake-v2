@@ -1,23 +1,26 @@
 function createPlayer() {
     const segments = [{x: 0, y: 0}]; // Array of objects with x and y of the segments position, index 0 will always be the head
     let direction = "right"; // left, right, up, down
+    let oldDirection = direction; // Direction in the current frame, prevents moving in the opposite direction by pressing something like "A" and "S" really fast
 
     // Private functions
     function changeDirection(newDirection) {
         // Check for valid direction and you aren't trying to move in the opposite direction.
-        if (newDirection === "left" && direction !== "right") {
+        if (newDirection === "left" && oldDirection !== "right") {
             direction = newDirection;
-        } else if (newDirection === "right" && direction !== "left") {
+        } else if (newDirection === "right" && oldDirection !== "left") {
             direction = newDirection;
-        } else if (newDirection === "up" && direction !== "down") {
+        } else if (newDirection === "up" && oldDirection !== "down") {
             direction = newDirection;
-        } else if (newDirection === "down" && direction !== "up") {
+        } else if (newDirection === "down" && oldDirection !== "up") {
             direction = newDirection;
         };
     };
 
     // Public functions
     function move() {
+        oldDirection = direction;
+
         const oldSegmentPositions = []; // Old position of segments before the shift in direction
         segments.forEach((pos, index) => {
             oldSegmentPositions[index] = {...pos}; // Store old position to access later otherwise a chain reaction will occur when shifting the positions of all elements

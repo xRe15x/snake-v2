@@ -94,8 +94,12 @@ function createUI(gridSize) {
         deathScreen.style.display = "none";
     }
 
-    themeBtn.addEventListener("click", () => {
-        // Show/Close dropdown
+    themeBtn.addEventListener("click", event => {
+        if (themeDropdown.classList.contains("open")) {
+            themeDropdown.classList.remove("open");
+        } else {
+            themeDropdown.classList.add("open");
+        }
     })
 
     themeDropdown.addEventListener("click", event => {
@@ -105,8 +109,6 @@ function createUI(gridSize) {
             styles = getColours(); // Register new colours for canvas
         }
     })
-
-    // Use event delegation on the dropdown div to change theme by changing the class of the root and using getColours();
 
     return {
         update,

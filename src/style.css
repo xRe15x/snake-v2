@@ -87,14 +87,14 @@ header {
     flex-direction: column;
     gap: 1px;
 
-    height: 100px;
+    /* height: 100px; */
 }
 
 #theme-dropdown > li > button {
     width: 100%;
 }
 
-#change-theme:hover + #theme-dropdown {
+#theme-dropdown.open {
     height: 100px;
 }
 

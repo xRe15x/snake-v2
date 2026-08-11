@@ -9,9 +9,21 @@ function createUI(gridSize) {
     const cellY = canvas.height / gridSize.y;
 
     const scoreText = document.getElementById("score");
-    //const bestScoreText = document.getElementById("best-score");
+    const bestScoreText = document.getElementById("best-score");
+
+    const deathScreen = document.getElementById("death-screen");
+    const dsScore = document.getElementById("death-screen-score");
+    const dsRestart = document.getElementById("restart"); // Restart button
 
     // Private functions
+    function showDeathScreen() {
+        deathScreen.style.display = "flex";
+    };
+
+    function hideDeathScreen() {
+        deathScreen.style.display = "none";
+    }
+
     function getColours() {
         const styles = getComputedStyle(document.documentElement); // Root element
         const colours = {};
@@ -60,7 +72,11 @@ function createUI(gridSize) {
     function update(gameData, isPlaying) {
         if (isPlaying === false) {
             console.log("GAME OVER");
+            showDeathScreen();
             //return;
+        } else {
+            console.log("PLAYING");
+            hideDeathScreen();
         }
 
         const {playerSegments, applePosition, score} = gameData;

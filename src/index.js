@@ -8,6 +8,7 @@ let game = createGame(gridSize);
 const ui = createUI(gridSize);
 
 let previousTimeStamp = 0;
+let isPlaying = false;
 
 function gameLoop(timeStamp) {
     requestAnimationFrame(gameLoop); // Recursive call to loop
@@ -18,13 +19,15 @@ function gameLoop(timeStamp) {
     previousTimeStamp = timeStamp;
 
     // Update game and UI
-    let gameEnded = game.update(timeStamp);
-
-    ui.update(game.getUIData());
-
-    if (gameEnded === true) {
-        game = createGame(gridSize);
+    if (isPlaying === true) {
+        let gameEnded = game.update(timeStamp);
+        if (gameEnded === true) {
+            isPlaying = false;
+            //game = createGame(gridSize);
+        }
     }
+
+    ui.update(game.getUIData(), isPlaying);
 };
 
 requestAnimationFrame(gameLoop); // Start loop

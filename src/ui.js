@@ -57,7 +57,12 @@ function createUI(gridSize) {
     }
 
     // Public functions
-    function update(gameData) {
+    function update(gameData, isPlaying) {
+        if (isPlaying === false) {
+            console.log("GAME OVER");
+            //return;
+        }
+
         const {playerSegments, applePosition, score} = gameData;
 
         // Clear last frame

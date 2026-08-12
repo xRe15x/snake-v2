@@ -22,7 +22,7 @@ function createPlayer() {
     };
 
     function swipe(start, end) {
-        const minThreshold = 50; // Minimum move threshold to trigger direction change
+        const minThreshold = 25; // Minimum move threshold to trigger direction change
 
         let differenceX = start.x - end.x;
         let differenceY = start.y - end.y;

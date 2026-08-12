@@ -3,6 +3,10 @@ function createPlayer() {
     let direction = "right"; // left, right, up, down
     let oldDirection = direction; // Direction in the previous frame, prevents moving in the opposite direction by pressing different keys really fast between frames
 
+    // Swiping
+    let touchStart;
+    let touchEnd;
+
     // Private functions
     function changeDirection(newDirection) {
         // Check for valid direction and you aren't trying to move in the opposite direction.
@@ -15,6 +19,23 @@ function createPlayer() {
         } else if (newDirection === "down" && oldDirection !== "up") {
             direction = newDirection;
         };
+    };
+
+    function swipe(start, end) {
+        const minThreshold = 50; // Minimum move threshold to trigger direction change
+
+        let differenceX = start.x - end.x;
+        let differenceY = start.y - end.y;
+
+        if (differenceX > minThreshold) {
+            changeDirection("left");
+        } else if (-differenceX > minThreshold) {
+            changeDirection("right");
+        } else if (differenceY > minThreshold) {
+            changeDirection("up");
+        } else if (-differenceY > minThreshold) {
+            changeDirection("down");
+        }
     };
 
     // Public functions
@@ -48,18 +69,36 @@ function createPlayer() {
 
     function checkCollided(pos) { // Check if segment head has collided with anything other than itself
         return (segments[0].x === pos.x && segments[0].y === pos.y) && pos !== segments[0];
-    }
+    };
 
     function increaseLength() { // Increase length by 1
         const lastSegment = segments[segments.length - 1];
         segments.push({x: lastSegment.x, y: lastSegment.y});
-    }
+    };
 
+    // Input detection for keys
     document.addEventListener("keydown", event => {
         const validDirections = {w: "up", a: "left", s: "down", d: "right"};
         if (validDirections[event.key]) {
             changeDirection(validDirections[event.key]);
         }
+    });
+
+    // Input detection for mobile swiping
+    document.addEventListener("touchstart", event => {
+        touchStart = {
+            x: event.touches[0].clientX,
+            y: event.touches[0].clientY
+        }
+    });
+
+    document.addEventListener("touchend", event => {
+        touchEnd = {
+            x: event.changedTouches[0].clientX,
+            y: event.changedTouches[0].clientY
+        }
+
+        swipe(touchStart, touchEnd);
     });
 
     return {
@@ -86,16 +125,16 @@ function createApple(gridSize) { // With how this is made, the game can only hav
         } while (segments.some(pos => pos.x === randomPos.x && pos.y === randomPos.y));
 
         return randomPos;
-    }
+    };
 
     // Public functions
     function spawn(segments) {
         position = getRandomPosition(segments)
-    }
+    };
 
     function remove() {
         position = undefined;
-    }
+    };
 
     return {
         spawn,
@@ -151,7 +190,7 @@ function createGame(gridSize) {
             applePosition: apple.getPosition,
             score
         };
-    }
+    };
 
     return {
         update,

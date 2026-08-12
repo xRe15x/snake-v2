@@ -175,7 +175,11 @@ function createGame(gridSize) {
             apple.remove();
             player.increaseLength();
             lastAppleTimeStamp = timeStamp; // Reset apple spawn timer only after its been eaten
+
             score++;
+            if (score > localStorage.getItem("bestScore")) {
+                localStorage.setItem("bestScore", score);
+            }
         }
 
         const headPos = player.segments[0]
@@ -188,6 +192,7 @@ function createGame(gridSize) {
         return {
             playerSegments: player.segments,
             applePosition: apple.getPosition,
+            bestScore: localStorage.getItem("bestScore") | 0,
             score
         };
     };

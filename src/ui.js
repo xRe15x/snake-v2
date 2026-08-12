@@ -76,7 +76,7 @@ function createUI(gridSize) {
             styles = getColours();
         }
 
-        const {playerSegments, applePosition, score} = gameData;
+        const {playerSegments, applePosition, bestScore, score} = gameData;
 
         // Clear last frame
         ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -88,6 +88,7 @@ function createUI(gridSize) {
 
         // Update scores
         scoreText.textContent = "Score: " + score;
+        bestScoreText.textContent = "Best: " + bestScore;
     };
 
     function showDeathScreen(score) {

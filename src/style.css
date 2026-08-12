@@ -48,6 +48,7 @@ ul {
 }
 
 body {
+    touch-action: none;
     margin: 0;
     height: 100dvh;
     display: flex;

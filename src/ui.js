@@ -71,6 +71,11 @@ function createUI(gridSize) {
 
     // Public functions
     function update(gameData) {
+        // I asked AI for help on this since I couldn't figure out why on mobile the canvas colours would not load (I now know its because of a race condition)
+        if (Object.keys(styles).length === 0) { // If we don't have styles then try get them again
+            styles = getColours();
+        }
+
         const {playerSegments, applePosition, score} = gameData;
 
         // Clear last frame

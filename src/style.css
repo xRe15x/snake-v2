@@ -86,8 +86,6 @@ header {
     display: flex;
     flex-direction: column;
     gap: 1px;
-
-    /* height: 100px; */
 }
 
 #theme-dropdown > li > button {
@@ -117,16 +115,15 @@ main {
 }
 
 .canvas-container {
-    height: clamp(220px, 42vh, 450px);
-    width: 100%;
+    aspect-ratio: auto / 1;
     position: relative;
 }
 
-@media (max-width: 500px) {
+/* @media (max-width: 500px) {
     .canvas-container {
         height: clamp(340px, 30vh, 500px);
     }
-}
+} */
 
 #game {
     background-color: var(--header-colour);

@@ -119,12 +119,6 @@ main {
     position: relative;
 }
 
-/* @media (max-width: 500px) {
-    .canvas-container {
-        height: clamp(340px, 30vh, 500px);
-    }
-} */
-
 #game {
     background-color: var(--header-colour);
     border: 3px solid var(--border-colour);

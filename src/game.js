@@ -26,7 +26,7 @@ function createPlayer() {
 
         let differenceX = start.x - end.x;
         let differenceY = start.y - end.y;
-
+        
         if (differenceX > minThreshold) {
             changeDirection("left");
         } else if (-differenceX > minThreshold) {
